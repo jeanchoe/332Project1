@@ -1,6 +1,6 @@
 package ckpt0;
 
-import main.HelloWorld;
+import datastructures.HelloWorld;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
