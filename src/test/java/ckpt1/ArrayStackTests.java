@@ -15,12 +15,8 @@ public class ArrayStackTests {
     public void test_hasWorkSize_insertOne_updatesState() {
         WorkList<Integer> STUDENT_STACK = new ArrayStack<>();
 
-        // before insertion
         assertFalse(STUDENT_STACK.hasWork());
-
         STUDENT_STACK.add(1);
-
-        // after insertion
         assertTrue(STUDENT_STACK.hasWork());
     }
 
@@ -38,6 +34,7 @@ public class ArrayStackTests {
     public void test_add_manyEntries_handlesArrayGrowth() {
         WorkList<Boolean> STUDENT_STACK = new ArrayStack<>();
 
+        // Adds many elements into the
         for (int i = 0; i < 100000; i++) {
             assertDoesNotThrow(() -> {
                 STUDENT_STACK.add(true);

@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Timeout;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ListFIFOQueueTests {
 
@@ -71,24 +69,49 @@ public class ListFIFOQueueTests {
     @Test
     public void testPeekHasException() {
         WorkList<Integer> STUDENT_INT = new ListFIFOQueue<>();
-        assertTrue(doesPeekThrowException(STUDENT_INT));
+        assertThrows(NoSuchElementException.class, () -> {
+            STUDENT_INT.peek();
+        });
 
-        addAndRemove(STUDENT_INT, 42, 10);
-        assertTrue(doesPeekThrowException(STUDENT_INT));
+        for (int i = 0; i < 10; i++) {
+            STUDENT_INT.add(42);
+        }
+        for (int i = 0; i < 10; i++) {
+            STUDENT_INT.next();
+        }
+
+        assertThrows(NoSuchElementException.class, () -> {
+            STUDENT_INT.peek();
+        });
     }
 
     @Test
     public void testNextHasException() {
         WorkList<Integer> STUDENT_INT = new ListFIFOQueue<>();
-        assertTrue(doesNextThrowException(STUDENT_INT));
+        assertThrows(NoSuchElementException.class, () -> {
+            STUDENT_INT.next();
+        });
 
-        addAndRemove(STUDENT_INT, 42, 10);
-        assertTrue(doesNextThrowException(STUDENT_INT));
+        for (int i = 0; i < 10; i++) {
+            STUDENT_INT.add(42);
+        }
+        for (int i = 0; i < 10; i++) {
+            STUDENT_INT.next();
+        }
+
+        assertThrows(NoSuchElementException.class, () -> {
+            STUDENT_INT.next();
+        });
     }
     @Test
     public void testClear() {
         WorkList<String> STUDENT_STR = new ListFIFOQueue<>();
-        addAll(STUDENT_STR, new String[]{"Beware", "the", "Jabberwock", "my", "son!"});
+
+        // Add all the words into the queue
+        String[] words = {"Beware", "the", "Jabberwock", "my", "son!"};
+        for (String value : words) {
+            STUDENT_STR.add(value);
+        }
 
         assertTrue(STUDENT_STR.hasWork());
         assertEquals(5, STUDENT_STR.size());
@@ -96,43 +119,11 @@ public class ListFIFOQueueTests {
         STUDENT_STR.clear();
         assertFalse(STUDENT_STR.hasWork());
         assertEquals(0, STUDENT_STR.size());
-        assertTrue(doesPeekThrowException(STUDENT_STR));
-        assertTrue(doesNextThrowException(STUDENT_STR));
+        assertThrows(NoSuchElementException.class, () -> {
+            STUDENT_STR.peek();
+        });
+        assertThrows(NoSuchElementException.class, () -> {
+            STUDENT_STR.next();
+        });
     }
-
-    // UTILITY METHODS
-
-    protected static <E> void addAll(WorkList<E> worklist, E[] values) {
-        for (E value : values) {
-            worklist.add(value);
-        }
-    }
-
-    protected static <E> void addAndRemove(WorkList<E> worklist, E value, int amount) {
-        for (int i = 0; i < amount; i++) {
-            worklist.add(value);
-        }
-        for (int i = 0; i < amount; i++) {
-            worklist.next();
-        }
-    }
-
-    protected static <E> boolean doesPeekThrowException(WorkList<E> worklist) {
-        try {
-            worklist.peek();
-        } catch (NoSuchElementException e) {
-            return true;
-        }
-        return false;
-    }
-
-    protected static <E> boolean doesNextThrowException(WorkList<E> worklist) {
-        try {
-            worklist.next();
-        } catch (NoSuchElementException e) {
-            return true;
-        }
-        return false;
-    }
-
 }

@@ -20,7 +20,9 @@ public class CircularArrayFIFOQueueTests {
 
         // Add all the words into the queue
         String[] words = {"Beware", "the", "Jabberwock", "my", "son!"};
-        addAll(STUDENT_QUEUE, words);
+        for (String value : words) {
+            STUDENT_QUEUE.add(value);
+        }
 
         // Checks to make sure the queue is in the correct state after adding a bunch of words
         assertTrue(STUDENT_QUEUE.hasWork());
@@ -149,7 +151,9 @@ public class CircularArrayFIFOQueueTests {
         assertTrue(STUDENT_QUEUE.isFull());
 
         // Queue should throw IllegalStateException when full
-        assertThrows(IllegalStateException.class, () -> STUDENT_QUEUE.add(2000));
+        assertThrows(IllegalStateException.class, () -> {
+            STUDENT_QUEUE.add(2000);
+        });
 
         // Checks to make sure every element is correct
         for (int i = 0; i < MAX_CAPACITY; i++) {
@@ -164,17 +168,6 @@ public class CircularArrayFIFOQueueTests {
             assertEquals(i, STUDENT_QUEUE.next());
             assertEquals(999 - i, STUDENT_QUEUE.size());
             assertFalse(STUDENT_QUEUE.isFull());
-        }
-    }
-
-    // UTILITY METHODS
-
-    /**
-     * Adds all the words in words to the queue
-     */
-    private static <E> void addAll(CircularArrayFIFOQueue<E> worklist, E[] values) {
-        for (E value : values) {
-            worklist.add(value);
         }
     }
 }
