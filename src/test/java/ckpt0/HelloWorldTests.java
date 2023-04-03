@@ -14,6 +14,6 @@ public class HelloWorldTests {
     @Test()
     @Timeout(value = 3000, unit = TimeUnit.MILLISECONDS)
     public void test_returnsHelloWorld() {
-        assertEquals(HelloWorld.helloWorld(), "Hello World");
+        assertEquals("Hello World", HelloWorld.helloWorld());
     }
 }
