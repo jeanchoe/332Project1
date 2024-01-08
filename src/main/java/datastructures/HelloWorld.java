@@ -8,6 +8,7 @@ public class HelloWorld {
     public static String helloWorld() {
         // Change the following line to
         // return "Hello World"
-        return "Welcome to CSE 332";
+        System.out.print("helloWorld() test");
+        return "Hello World";
     }
 }
