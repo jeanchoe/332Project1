@@ -95,7 +95,12 @@ public class YourOwnCircularArrayFIFOQueueTests {
     public void test_size_afterInsertion_incrementsByOne() {
         CircularArrayFIFOQueue<Integer> queue = new CircularArrayFIFOQueue<>(5);
         // Implement this test!
-        fail();
+        for(int i = 0; i < 5; i++) {
+            queue.add(i);
+            assertEquals(i + 1, queue.size());
+        }
+
+//        fail();
     }
 
     /**
@@ -106,7 +111,14 @@ public class YourOwnCircularArrayFIFOQueueTests {
     public void test_add_isFull_throwsException() {
         CircularArrayFIFOQueue<Integer> queue = new CircularArrayFIFOQueue<>(5);
         // Implement this test!
-        fail();
+        for(int i = 1; i < 6; i++){
+            queue.add(i);
+        }
+        assertThrows(IllegalStateException.class, () -> {
+            queue.add(10);
+        });
+
+//        fail();
     }
 
     /**
@@ -124,7 +136,15 @@ public class YourOwnCircularArrayFIFOQueueTests {
     public void test_addNext_cyclesEntireQueue_returnsCorrect() {
         CircularArrayFIFOQueue<Integer> queue = new CircularArrayFIFOQueue<>(5);
         // Implement this test!
-        fail();
+        for(int i = 1; i < 6; i++){
+            queue.add(i);
+        }
+        for(int j = 1; j < 6; j++){
+            assertEquals(j, queue.next());
+        }
+        queue.add(10);
+        assertEquals(10, queue.peek());
+//        fail();
     }
 
 }
