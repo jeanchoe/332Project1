@@ -97,6 +97,7 @@ public class HashTrieMap<A extends Comparable<A>, K extends BString<A>, V> exten
             delRec((HashTrieNode) this.root, key.iterator(), null);
         }
     }
+
     private boolean delRec(HashTrieNode node, Iterator<A> initialKey, HashTrieNode branch) {
         if (!initialKey.hasNext()) {
             if (node != null) {
